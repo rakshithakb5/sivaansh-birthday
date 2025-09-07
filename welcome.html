@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎉 Happy 3rd Birthday Sivaansh! 🎂</title>
+    <style>
+        /* ========== Reset & Base ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #ffc0cb 75%, #ffb6c1 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .container { position: relative; z-index: 10; padding: 20px; max-width: 900px; margin: 0 auto; }
+
+        /* ========== Animated Background ========== */
+        .balloons { position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .balloon {
+            position: absolute; width: 60px; height: 70px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 15s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(-5deg); }
+            50%      { transform: translateY(-100vh) rotate(5deg); }
+        }
+        .balloon:nth-child(1) { left: 10%; background: #ff6b6b; animation-delay: 0s; }
+        .balloon:nth-child(2) { left: 30%; background: #4ecdc4; animation-delay: 2s; }
+        .balloon:nth-child(3) { left: 50%; background: #ffe66d; animation-delay: 4s; }
+        .balloon:nth-child(4) { left: 70%; background: #a8e6cf; animation-delay: 6s; }
+        .balloon:nth-child(5) { left: 90%; background: #ff8cc8; animation-delay: 8s; }
+
+        /* ========== Welcome Screen ========== */
+        #welcomeScreen {
+            text-align: center; background: rgba(255, 255, 255, 0.95); border-radius: 30px;
+            padding: 40px; margin-top: 50px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: bounceIn 1s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        h1 {
+            color: #ff1493; font-size: 3em; margin-bottom: 20px; text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            animation: rainbow 3s linear infinite;
+        }
+        @keyframes rainbow {
+            0% { color: #ff1493; }
+            20% { color: #ff6b6b; }
+            40% { color: #4ecdc4; }
+            60% { color: #ffe66d; }
+            80% { color: #a8e6cf; }
+            100% { color: #ff1493; }
+        }
+        .question { font-size: 2em; color: #764ba2; margin: 30px 0; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .options { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 30px 0; }
+        .option-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 20px 40px;
+            font-size: 1.5em; border-radius: 50px; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .option-btn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+
+        /* ========== Main Content ========== */
+        #mainContent { display: none; animation: fadeIn 1s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .birthday-header {
+            text-align: center; background: rgba(255, 255, 255, 0.95); border-radius: 30px; padding: 30px; margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .age-display { font-size: 5em; color: #ff1493; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* ========== Cards ========== */
+        .personality-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 25px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s; cursor: pointer;
+        }
+        .card:hover { transform: translateY(-10px) rotate(2deg); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .card-icon { font-size: 3em; margin-bottom: 15px; }
+        .card-title { color: #764ba2; font-size: 1.5em; margin-bottom: 10px; }
+        .card-description { color: #666; font-size: 1.1em; line-height: 1.4; }
+
+        /* ========== Message Box ========== */
+        .message-from-pinni {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e); border-radius: 20px; padding: 30px; margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .message-text { font-size: 1.3em; color: #2d3436; line-height: 1.6; text-align: center; }
+
+        /* ========== Confetti & Cake ========== */
+        .confetti { position: fixed; width: 10px; height: 10px; background: #ff1493; animation: confetti-fall 3s linear infinite; }
+        @keyframes confetti-fall { to { transform: translateY(100vh) rotate(360deg); } }
+        .cake-icon { font-size: 6em; animation: wiggle 1s ease-in-out infinite; }
+        @keyframes wiggle { 0%,100% { transform: rotate(-3deg);} 50% { transform: rotate(3deg);} }
+
+        /* ========== Explanation Box ========== */
+        .explanation-box {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdbb); border-radius: 20px; padding: 25px; margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 3px solid #fff;
+        }
+        .explanation-title { font-size: 1.8em; color: #2d3436; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .explanation-text { font-size: 1.2em; color: #2d3436; line-height: 1.6; }
+
+        /* ========== Career Dreams Section (with photos) ========== */
+        .career-dreams {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdbb);
+            border-radius: 20px; padding: 30px; margin: 30px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .career-title { text-align: center; font-size: 2em; color: #2d3436; margin-bottom: 20px; }
+        .career-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px; padding: 20px; margin: 15px 0;
+            display: flex; align-items: center; gap: 16px;
+            /* reveal animation base */
+            opacity: 0; transform: translateX(-30px);
+            transition: opacity .5s ease, transform .5s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .career-item.show { opacity: 1; transform: translateX(0); }
+        .career-profession {
+            font-size: 1.5em; font-weight: bold; color: #ff1493; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .career-quote { font-size: 1.2em; color: #2d3436; font-style: italic; line-height: 1.4; }
+        .career-photo {
+            width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex: 0 0 72px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12); border: 3px solid #fff;
+        }
+        /* Alternate layout (photo flips side on even rows) */
+        #careerContainer .career-item:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+        /* Mobile: keep photos on the left for readability */
+        @media (max-width: 600px) {
+            #careerContainer .career-item:nth-child(even) { flex-direction: row; text-align: left; }
+        }
+
+        /* ========== Responsive tweaks ========== */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .question { font-size: 1.5em; }
+            .option-btn { font-size: 1.2em; padding: 15px 30px; }
+            .age-display { font-size: 3em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Balloons -->
+    <div class="balloons">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
+
+    <!-- Confetti -->
+    <div id="confettiContainer"></div>
+
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen">
+            <h1>🎈 Special Birthday 🎈</h1>
+            <div class="cake-icon">🎂</div>
+            <div class="question">Who is visiting this magical page?</div>
+            <div class="options">
+                <button class="option-btn" onclick="showMainContent('Sivaansh')">👦 Sivaansh</button>
+                <button class="option-btn" onclick="showMainContent('Amma')">💕 Amma</button>
+                <button class="option-btn" onclick="showMainContent('Nanna')">👫 Nanna</button>
+                <button class="option-btn" onclick="showMainContent('Others')">👦 Others</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent">
+            <div class="birthday-header">
+                <h1>🎉 Happy 3rd Birthday, Sivaansh! 🎉</h1>
+                <div class="age-display">3</div>
+                <p style="font-size: 1.5em; color: #764ba2;">You're a Big Boy Now!</p>
+            </div>
+
+            <!-- Explanation Box -->
+            <div class="explanation-box">
+                <div class="explanation-title">
+                    <span>🎮</span>
+                    <span>Hey Sivaansh! Let me tell you what's happening here!</span>
+                </div>
+                <div class="explanation-text">
+                    This is YOUR special birthday webpage! When someone clicks a button, magical things happen! The balloons are floating up to the sky just for you! 🎈 The colors are dancing and changing because it's your special day! Your Pinni/Chikamma made this because she loves you SO MUCH! Every time you see something move or sparkle, it's celebrating that you're 3 years old now! Isn't that amazing? 🌟
+                </div>
+            </div>
+
+            <!-- Personality Cards -->
+            <div class="personality-cards">
+                <div class="card" onclick="animateCard(this)">
+                    <div class="card-icon">🌟</div>
+                    <div class="card-title">The Little Explorer</div>
+                    <div class="card-description">
+                        Sivaansh loves discovering new things every day! Whether it's a new toy, a butterfly in the garden, or a funny sound, everything is an adventure!
+                    </div>
+                </div>
+
+                <div class="card" onclick="animateCard(this)">
+                    <div class="card-icon">😊</div>
+                    <div class="card-title">The Happy Giggler</div>
+                    <div class="card-description">
+                        His laughter can light up any room! Sivaansh finds joy in the smallest things and his smile makes everyone around him happy too!
+                    </div>
+                </div>
+
+                <div class="card" onclick="animateCard(this)">
+                    <div class="card-icon">🤗</div>
+                    <div class="card-title">The Loving Hugger</div>
+                    <div class="card-description">
+                        Nobody gives hugs like Skanda. When he calls "Pinni!" or "Chikamma!", it's followed by the warmest, sweetest hugs that melt hearts!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Career Dreams Section -->
+            <div class="career-dreams">
+                <div class="career-title">🚀 Sivaansh's part-time</div>
+                <div id="careerContainer">
+                    
+                    <div class="career-item">
+                        <img src="images/cricketer.jpg" alt="Cricketer" class="career-photo" />
+                        <div>
+                            <div class="career-profession">🏏 CRICKETER</div>
+                            <div class="career-quote">"I hit ball! Ball goes WHOOOOSH! I run REALLY fast in circles!"</div>
+                        </div>
+                    </div>
+
+                    <div class="career-item">
+                        <img src="images/scholar.jpg" alt="Scholar" class="career-photo" />
+                        <div>
+                            <div class="career-profession">📚 SCHOLAR</div>
+                            <div class="career-quote">"I love learning new things every day and sharing my knowledge with others!"</div>
+                        </div>
+                    </div>
+
+
+                    <div class="career-item">
+                        <img src="images/businessleader.jpg" alt="Business Leader" class="career-photo" />
+                        <div>
+                            <div class="career-profession">👔 BUSINESS LEADER</div>
+                            <div class="career-quote">"I'm the boss of EVERYONE!"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message from Pinni -->
+            <div class="message-from-pinni">
+                <h2 style="text-align: center; color: #2d3436; margin-bottom: 20px;">💝 A Special Message from Pinni/Chikamma 💝</h2>
+                <div class="message-text">
+                    My dearest Sivaansh,<br /><br />
+                    Today you turn 3, and my heart is overflowing with love for you! Every time you call me "Pinni" or "Chikamma," there's a different kind of joy I carry. You are growing up so fast, becoming such a smart, kind, and wonderful little boy. Your giggles, your hugs, your curious questions - everything about you fills the room with joy. I love you more than all the stars in the sky and all the balloons at your party! Happy Birthday, precious one! 🎂❤️
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sparkle animation keyframes
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes fadeOut {
+                0% { opacity: 1; transform: scale(0) rotate(0deg); }
+                50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+                100% { opacity: 0; transform: scale(0) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+
+        function showMainContent(visitor) {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+
+            createConfetti();
+
+            // Staggered reveal for career items
+            setTimeout(showCareerDreams, 800);
+
+            // Dialogs for all visitors (fixed values)
+            if (visitor === 'Sivaansh') {
+                setTimeout(() => {
+                    alert("🎉 YAY! It's the Birthday Boy! Happy Birthday Sivaansh! You're 3 now! 🎂");
+                }, 500);
+            } else if (visitor === 'Amma') {
+                setTimeout(() => {
+                    alert('👩 Welcome Amma! Your love makes this day extra special for Sivaansh! 💕');
+                }, 500);
+            } else if (visitor === 'Nanna') {
+                setTimeout(() => {
+                    alert('👨 Welcome Nanna! Your little boy is growing up so fast! Happy celebrations! 🎉');
+                }, 500);
+            } else if (visitor === 'Others') {
+                setTimeout(() => {
+                    alert("👫 Welcome to Sivaansh's special day! Thanks for celebrating with us! 🎊");
+                }, 500);
+            }
+        }
+
+        function showCareerDreams() {
+            const items = document.querySelectorAll('#careerContainer .career-item');
+            items.forEach((item, i) => {
+                setTimeout(() => item.classList.add('show'), i * 300);
+            });
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#a8e6cf', '#ff8cc8', '#667eea'];
+            const container = document.getElementById('confettiContainer');
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    container.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 100);
+            }
+        }
+
+        function animateCard(card) {
+            card.style.transform = 'scale(1.1) rotate(5deg)';
+            setTimeout(() => {
+                card.style.transform = 'translateY(-10px) rotate(2deg)';
+            }, 300);
+        }
+
+        // Random sparkles
+        setInterval(() => {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.fontSize = Math.random() * 20 + 10 + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'fadeOut 2s ease-out forwards';
+            sparkle.style.zIndex = '1000';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+        }, 2000);
+    </script>
+</body>
+</html>
